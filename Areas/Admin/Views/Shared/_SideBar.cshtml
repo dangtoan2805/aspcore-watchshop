@@ -1,0 +1,57 @@
+<aside class="left-sidebar bg-sidebar">
+        <div id="sidebar" class="sidebar sidebar-with-footer">
+          <!-- Aplication Brand -->
+          <div class="app-brand">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" >
+                <img src="~/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        
+              <span class="brand-name text-truncate">Homer House</span>
+              </svg>
+              
+
+            </a>
+          </div>
+          <!-- begin sidebar scrollbar -->
+          <div>
+            <!-- sidebar menu -->
+            <ul class="nav sidebar-inner" id="sidebar-menu" data-nav="@ViewBag.IndexSideNav">
+              <!-- dashboard -->
+              <li>
+                <a class="sidenav-item-link" asp-area="Admin" asp-controller="Home">
+                  <i class="mdi mdi-view-dashboard-outline"></i>
+                  <span class="nav-text">Tổng Quan</span>
+                </a>
+              </li>
+              <!-- orders -->
+              <li>
+                <a class="sidenav-item-link" asp-area="Admin" asp-controller="Order">
+                  <i class="mdi mdi-format-list-checks"></i>
+                  <span class="nav-text">Đơn Hàng</span> 
+                </a>
+              </li>
+              <!-- products -->
+              <li>
+                <a class="sidenav-item-link" asp-area="Admin" asp-controller="Product">
+                  <i class="mdi mdi-watch"></i>
+                  <span class="nav-text">Sản Phẩm</span> 
+                </a>
+              </li>
+              <!-- customers -->
+              <li>
+                <a class="sidenav-item-link"  asp-area="Admin" asp-controller="Customer" >
+                  <i class="mdi mdi-account-group-outline"></i>
+                  <span class="nav-text">Khách Hàng</span> 
+                </a>
+              </li>
+              <!-- promotion -->
+             <li>
+                <a class="sidenav-item-link" asp-area="Admin" asp-controller="Promotion" >
+                  <i class="mdi mdi-sale"></i>
+                  <span class="nav-text">Khuyến Mãi</span> 
+                </a>
+              </li>
+              <!-- privacy -->
+            </ul>
+          </div>
+        </div>
+      </aside>

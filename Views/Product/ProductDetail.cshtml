@@ -1,0 +1,187 @@
+﻿@using System.Globalization;
+@model ProductDetailVM
+@{
+    ViewData["Title"] = "ProductDetail";
+    bool isSale = Model.Promotion == 0 ? false : true;
+    string hidden = isSale ? "" : "vt-hidden" ;
+    string lable = "Giá";
+    string current = ""; 
+    string price ="";
+    if(isSale){
+        //Have Promotion
+        lable= "Chỉ còn";
+        current = (Model.Price * (1 - Model.Promotion)).ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+        price = Model.Price.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+    }
+    else{
+        current = Model.Price.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+    }
+}
+@section Css{
+    <link href="~/css/product.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/js/detail.js"></script>
+}
+<div class="container-fluid bg-dark text-center">
+    <h3 class="m-0 py-2 text-white">Thông tin sản phẩm</h3>
+</div>
+<div class="vt-main">
+    <!--***** Bread Crumb*****-->  
+    <div class="container">
+        <ol class="vt-breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Thông tin sản phẩm</li>
+        </ol>
+    </div>
+        <!--*****Content*****-->  
+    <div class="container pb-5">
+        <!--*****Image*****-->  
+        <div class="row pb-5">
+            <div class="col-md-6 col-sm-12" >
+                <div class="row">
+                    <div class="col-8">
+                        <div class="vt-product p-0">
+                            <a>
+                                <div class="vt-product-img vt-product-img-big">
+                                    <img id="vt-photo-show" src="~/product/@Model.Image" alt="Product Image">
+                                    <img class="@hidden" src="~/images/sale.png" />
+                                </div>
+                            </a>  
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex vt-gallery flex-column align-items-center">
+                        @if(Model.Images!=null)
+                        {
+                            foreach (var item in Model.Images.Split(','))
+                            {
+                                <div class="vt-img mb-2">
+                                    <img src="~/product/@item">
+                                </div>
+                            }
+                        }  
+                    </div>   
+                </div>  
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pl-md-5">
+                <h1>@Model.Name</h1>
+                @if(isSale){
+                    <div class="row my-3 align-items-center">
+                        <div class="col-4 font-weight-bold">Giá</div>
+                        <div class="col-8">
+                            <p class="text-right">
+                                <del>@price</del> 
+                                <sup>đ</sup>
+                            </p>
+                        </div>
+                    </div>
+                }
+                <div class="row my-3 align-items-center">
+                    <div class="col-4 font-weight-bold">@lable</div>
+                    <div class="col-8">
+                        <p class="text-right font-weight-bold m-0 vt-price-big">
+                            <span>@current</span> 
+                            <sup>đ</sup>
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <p class="font-weight-bold">Ưu đãi</p>
+                <ul class="list-group list-group-flush vt-list-ft mb-3">
+                    <li class="list-group-item">
+                        <img src="~/images/change.png" class="mr-3" width="25" />
+                        Hàng full box
+                    </li>
+                    <li class="list-group-item">
+                        <img src="~/images/change.png" class="mr-3" width="25" />
+                        Freeship cho đơn hàng trên 1 triệu
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                         <a class="btn btn-dark w-100" href="/Cart/BuyNow?productID=@Model.ID">Mua ngay</a>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <button id="add-cart" data-itemid="@Model.ID" type="button" class="btn btn-outline-dark w-100">Thêm vào giỏ hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="vt-line">
+         <!--*****Detail*****-->  
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+                <h4 class="vt-title">Thông số sản phẩm</h4>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>Tên SP</td>
+                            <td>@Model.Name </td>
+                        </tr>
+                        <tr>
+                            <td>Kính</td>
+                            <td>@Model.TypeGlass</td>
+                        </tr>
+                        <tr>
+                            <td>Viền</td>
+                            <td>@Model.TypeBorder</td>
+                        </tr>
+                        <tr>
+                            <td>Máy</td>
+                            <td>@Model.TypeMachine</td>
+                        </tr>
+                        <tr>
+                            <td>Xuất xứ</td>
+                            <td>@Model.Origin</td>
+                        </tr>
+                        <tr>
+                            <td>Thương hiệu</td>
+                            <td id="relation">@Model.Brand</td>
+                        </tr>
+                        <tr>
+                            <td>Bảo hành</td>
+                            <td>@Model.Warranty</td>
+                        </tr>
+                        <tr>
+                            <td>Kích thước</td>
+                            <td>@Model.Parameter</td>
+                        </tr>
+                        <tr>
+                            <td>Chống nước</td>
+                            <td>@Model.ResistWater</td>
+                        </tr>
+                        <tr>
+                            <td>Chức năng</td>
+                            <td>@Model.Func</td>
+                        </tr>
+                        <tr>
+                            <td>Màu sắc/td>
+                            <td>@Model.Color</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pl-md-5"  >
+                <h4 class="vt-title">Giới thiệu</h4>
+                @{  
+                    if(Model.DescriptionProduct !=null)
+                    {                    
+                        var content = Model.DescriptionProduct.Split('/');
+                        <h4>@content[0]</h4>
+                        <p>@content[1]</p>
+                    }
+                }
+            </div>        
+        </div>
+    </div>
+    <hr class="vt-line">
+    <!--***** Product Relation*****-->  
+    <div class="container">
+        <h4 class="vt-title text-center">Sản phẩm liên quan</h4>
+            <!-- Container Products -->
+        <div id="vt-container-data" class="row"></div>
+    </div>
+</div>
+
+

@@ -1,0 +1,73 @@
+﻿/* Home */
+
+.vt-line {
+    width: 40%;
+}
+
+.vt-title {
+    font-weight: bold;
+    padding: 1rem 0 !important;
+}
+
+.vt-more {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: #343a40
+}
+
+/* Banner */
+
+.vt-banner h4{
+     margin-top:1rem;
+}
+
+.vt-banner {
+    position:relative;
+}
+
+.vt-banner-text {
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid white;
+    border-radius: 0.25rem;
+    padding: 0.5rem 2rem;
+    z-index: 1;
+    transition-duration:0.5s;
+    white-space:nowrap;
+}
+
+.vt-banner:hover .vt-banner-text {
+    background-color: #121416;
+    color:white;
+    text-decoration:none;
+}
+
+.vt-img img {
+    transition-duration: 2s;
+}
+
+.vt-banner:hover .vt-img img:first-child{
+    transform:scale(1.5);
+}
+
+.vt-banner-text:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #121416;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+/* Silder */
+.vt-slider:before{
+    padding-top:25% !important;
+}
+

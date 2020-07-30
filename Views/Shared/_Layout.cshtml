@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - watchShop.WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/lib/fonts/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="~/css/site.css" /> *@
+    <link rel="stylesheet" href="~/css/template.css" />
+    <link rel="stylesheet" href="~/css/preloaded.css" />
+    @RenderSection("Css", false)
+</head>
+<body>
+    <!--***** Preloaded *****-->
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+                <div class="object" id="object_four"></div>
+                <div class="object" id="object_five"></div>
+                <div class="object" id="object_six"></div>
+                <div class="object" id="object_seven"></div>
+                <div class="object" id="object_eight"></div>
+                <div class="object" id="object_big"></div>
+            </div>
+        </div>
+	</div>
+    <!--***** Header*****-->
+    <header>
+        <div class="container-fluid">
+            <partial name="_HeaderNavbar" />
+        </div>
+        <div class="container-fluid position-relative px-0 " style="width:100%">
+            <div class="vt-search collapse position-absolute " id="collapseSearch">
+                <from>
+                    <div class="px-5 p-3 bg-light">
+                        <input type="text" id="vt-searchBar" class="form-control" placeholder="Search ..." />
+                    </div>
+                </from>
+                <div id="result">
+                    <div id="vt-loader-min d-none" class="text-center">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>      
+        </div> 
+    </header>
+    <!--***** Main*****-->
+    <main>
+        <div role="main" class="pb-3">
+            @RenderBody()
+        </div>
+    </main>
+    <hr />
+    <!--***** Footer *****-->
+    <footer >
+        @{await Html.RenderPartialAsync("_Footer");}
+    </footer>
+    <!--***** Scripts *****-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @* <script src="~/js/site.js" asp-append-version="true"></script>  *@
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

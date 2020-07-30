@@ -1,0 +1,184 @@
+@{
+    ViewBag.Title="Đơn hàng";
+    ViewBag.IndexSideNav=1;
+}
+@section css{
+    <link href="~/lib/daterangepicker/daterangepicker.css" rel="stylesheet"/>
+}
+@section scripts{
+    <script src="~/lib/daterangepicker/moment.min.js"></script>
+    <script src="~/lib/daterangepicker/daterangepicker.js"></script>
+    <script src="~/js/admin/orders.js"> </script>
+}
+<div class="content-wrapper">
+    <div class="content"> 
+        <!--Order Table -->
+        <div class="card card-table-border-none  mb-0">
+            <div class="card-header">     
+                <div class="col-lg-2 col-md-12 mb-3">
+                    <h2 class="mb-0" >Đơn hàng</h2>
+                </div>
+                <!-- Search -->
+                <div class="col-lg-4 col-md-12 mb-3">
+                    <div class="search-form w-100">
+                        <input type="text" id="search-input" class="form-control" 
+                            placeholder="'', 'chart' etc."/>
+                    </div>
+                </div>
+                <!-- Date Range Picker -->
+                <div class="col-lg-4 col-md-12 mb-3">
+                    <div class="ml-auto vt-daterange ">
+                        <div id="reportrange" class="form-control" >
+                            <i class="mdi mdi-calendar"></i>
+                            <span></span> <i class="mdi mdi-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-12 mb-3 text-right">
+                    <a id="vt-export" class=" d-block text-primary " style="cursor: pointer;">
+                        <i class="mdi mdi-export"></i> Export</a>
+                </div>
+            </div>
+            <div class="card-body pt-0 pb-5 vt-card-body">
+                <div id="vt-loader">
+                    <div class="loader"></div>
+                </div>
+                <div id="vt-data">
+                    <!--Header List-->
+                    <div class="row mb-3 text-dark">
+                        <div class="col-md-10 col-8">
+                            <div class="row ">
+                                <div class="col-md-2 col-4">ID</div>
+                                <div class="col-md-2 vt-d-none">Order Date</div>
+                                <div class="col-md-4 col-8">Customer</div>
+                                <div class="col-md-2 vt-d-none">Phone</div>
+                                <div class="col-md-2 vt-d-none" >
+                                    <div class="dropdown d-inline-block">
+                                        <span class="btn-square btn-outline-secondary vt-none-hover border-0 dropdown-toggle" 
+                                            type="button" id="dropdownCost" 
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                            Order Cost
+                                        </span>
+                                        <div id="vt-orderby-cost" class="dropdown-menu" aria-labelledby="dropdownCost">
+                                            <a class="dropdown-item" href="#" data-index="0">Thấp</a>
+                                            <a class="dropdown-item" href="#" data-index="1">Cao</a>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-2">
+                            <div class="dropdown d-inline-block">
+                                <span class="btn-square btn-outline-secondary vt-none-hover border-0 dropdown-toggle" 
+                                    type="button" id="dropdownStatus" 
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                    Status
+                                </span>
+                                <div id="vt-orderby-status" class="dropdown-menu" aria-labelledby="dropdownStatus">
+                                    <a class="dropdown-item" href="#" data-index="0">Tất cả</a>
+                                    <a class="dropdown-item" href="#" data-index="1">Chưa xác nhận</a>
+                                    <a class="dropdown-item" href="#" data-index="2">Đã xác nhận</a>
+                                    <a class="dropdown-item" href="#" data-index="3">Đang giao</a>
+                                    <a class="dropdown-item" href="#" data-index="4">Hoàn thành</a>
+                                    <a class="dropdown-item" href="#" data-index="5">Huỷ</a>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <!--Content List-->
+                    <div id="vt-container-data">
+                    </div>
+                </div>         
+            </div>
+            <div class="card-footer bg-white py-3">
+                <div class="d-flex justify-content-end align-items-center">
+                     <nav class="pr-4">
+                        <ul id="vt-pagination" class="pagination pagination-sm justify-content-center">
+                        </ul>
+                    </nav>
+                    <p class="text-secondary pl-4 "><span  id="vt-total">0</span> đơn hàng</p>
+                </div>
+            </div>
+        </div>
+        <!-- Model -->
+        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="ModalGrid" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderModalTitle">Thông tin đơn hàng</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row mb-3">
+                                    <div class="col-4">Mã đơn</div>
+                                    <div id="vt-order-id" class="col-8 ml-auto"></div>
+                                </div>
+                                 <div class="row mb-3">
+                                    <div class="col-4">Trạng thái</div>
+                                    <div id="vt-order-status" class="col-8 ml-auto"></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-4">Ngày đặt</div>
+                                    <div id="vt-order-date" class="col-8 ml-auto"></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-4">Họ tên:</div>
+                                    <div id="vt-order-name" class="col-8 ml-auto"></div>
+                                </div>
+                                 <div class="row mb-3">
+                                    <div class="col-4">Số điện thoại</div>
+                                    <div id="vt-order-phone" class="col-8 ml-auto"></div>
+                                </div>
+                                 <div class="row mb-3">
+                                    <div class="col-4">Địa chỉ</div>
+                                    <div id="vt-order-address" class="col-8 ml-auto"></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12">Ghi chú</div>
+                                    <div id="vt-order-note" class="col-12"></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col" class="text-center">Sản phẩm</th>
+                                                    <th scope="col">Số lượng</th>
+                                                    <th scope="col">Giá</th>
+                                                    <th scope="col">Giảm</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="vt-order-products">											
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-4">Tổng đơn hàng</div>
+                                    <div id="vt-order-total" class="col-8 ml-auto"></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-4">Giảm giá theo bill</div>
+                                    <div id="vt-order-discountBill" class="col-8 ml-auto"></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-4">Phí vận chuyển</div>
+                                    <div id="vt-order-ship" class="col-8 ml-auto"></div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-4">Thanh toán</div>
+                                    <div id="vt-order-pay" class="col-8 ml-auto text-danger h3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

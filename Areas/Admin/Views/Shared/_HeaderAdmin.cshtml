@@ -1,0 +1,21 @@
+<header class="main-header" id="header">
+    <nav class="navbar navbar-static-top navbar-expand-lg pr-0">
+    <!-- Sidebar toggle button -->
+        <button id="sidebar-toggler" class="sidebar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+        </button>
+        <div class="navbar-right ml-auto pr-5 ">
+            <ul class="nav navbar-nav">
+                <!-- user Account -->
+                <form asp-area="Identity" asp-page="/Account/Logout" 
+                    asp-route-returnUrl="@Url.Page("/", new { area = "" })" 
+                    method="post">
+                    <button type="submit" class="text-dark">
+                    <i class="mdi mdi-logout"></i>
+                    Đăng xuất
+                </button>
+                </form>
+            </ul>
+        </div>
+    </nav>
+</header>

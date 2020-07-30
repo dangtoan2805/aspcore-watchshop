@@ -1,0 +1,143 @@
+@{
+    ViewBag.Title="PromotionDetail";
+}
+@model aspCore.WatchShop.Models.PromotionVM
+@section scripts{
+    <script src="~/js/admin/promotion-detail.js"></script>
+}
+<div class="content-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="pb-3">Thông tin khuyến mãi</h4>
+                <form action="/Admin/Prommotion/Submit" method="POST">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="Name">ID</label>
+                            <input type="text" class="form-control" asp-for="ID" placeholder="First name" readonly value="@Model.ID" required>
+                            <span class="valid-feedback" asp-validation-for="ID"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="Name">Tên khuyến mãi</label>
+                            <input type="text" class="form-control" asp-for="Name" placeholder="First name" value="@Model.Name" required>
+                            <span class="valid-feedback" asp-validation-for="Name"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationServer02">Luôn áp dụng</label>
+                        </div>
+                        <div class="col-md-6 mb-3 text-right">
+                            <label class="switch switch-icon switch-primary switch-pill form-control-label">
+                                @{var allways = Model.FromDate == DateTime.MaxValue ?"checked": "" ;}
+                                <input type="checkbox" class="switch-input form-check-input" @allways>
+                                <span class="switch-label"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FromDate">Từ ngày</label>
+                            <input type="date" class="form-control" asp-for="FromDate" placeholder="Last name" value="@Model.FromDate.ToShortDateString()" required>
+                            <span class="valid-feedback" asp-validation-for="FromDate"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ToDate">Đến này</label>
+                            <input type="date" class="form-control" asp-for="ToDate" placeholder="Last name" value="@Model.ToDate" required>
+                            <span class="valid-feedback" asp-validation-for="ToDate"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label asp-for="Discount">Mức giảm</label>
+                            @{var discout = ((int) (Model.Discount * 100));}
+                            <input type="number" class="form-control" asp-for="Discount" placeholder="First name" value="@discout %" required>
+                            <span class="valid-feedback" asp-validation-for="Discount"></span>
+                        </div>                        
+                    </div>                
+                    <div class="pt-3">
+                        <button class="btn btn-primary w-25" type="submit">Lưu</button>
+                        <a class="btn btn-danger w-25" href="/Admin/Promotion/Delete?promId=@Model.ID" type="button">Xoá Sản phẩm</a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 px-5">
+                <h4 class="pb-3">Danh sachs sản phẩm khuyến mãi</h4>
+                <div class="row align-items-center">
+                     <div class="col-md-4 mb-3">
+                        <label for="exampleFormControlSelect3">SP phân loại</label>
+                     </div>
+                     <div class="col-md-4 mb-3" >
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect3">
+                          @foreach (var item in ViewBag.Category)
+                          {
+                            <option value="@item.ID">@item.Name</option>
+                          }
+                        </select>
+                     </div>   
+                     <div class="col-md-2 mb-3">
+                            <label for="validationServer02">Tất cả SP</label>
+                        </div>
+                        <div class="col-md-2 mb-3 text-right">
+                            <label class="switch switch-icon switch-primary switch-pill form-control-label">
+                                <input type="checkbox" class="switch-input form-check-input" value="on" checked>
+                                <span class="switch-label"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                </div>
+                               
+                <table class="table card-table table-responsive table-responsive-large w-100">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th class="d-none d-lg-table-cell"> Hình ảnh</th>
+                        <th >Tên SP</th>
+                        <th>Phân loại</th>
+                        <th>Giá bán</th>
+                    </tr>
+                    </thead>
+                    <tbody id="vt-container-data">
+                    <tr>
+                        <td >24541</td>
+                        <td class="d-none d-lg-table-cell">
+                            <div class="vt-img" style="width:50px">
+                                <img src="~/product/img_watch_1.jpg">
+                            </div>
+                        </td>
+                        <td >
+                            <a class="text-dark" href=""> Hat Black Suits</a>
+                        </td>
+                        <td >1 Unit</td>
+                        <td class="d-none d-lg-table-cell">$325</td>
+                        <td class="d-none d-lg-table-cell">
+                            <a href="#" class="btn mdi mdi-delete"></a>
+                        </td>
+                    </tr>    
+                    <tr>
+                        <td >24541</td>
+                        <td class="d-none d-lg-table-cell">
+                            <div class="vt-img" style="width:50px">
+                                <img src="~/product/img_watch_1.jpg">
+                            </div>
+                        </td>
+                        <td >
+                            <a class="text-dark" href=""> Hat Black Suits</a>
+                        </td>
+                        <td >1 Unit</td>
+                        <td class="d-none d-lg-table-cell">$325</td>
+                        <td class="d-none d-lg-table-cell">
+                            <a href="#" class="btn mdi mdi-delete"></a>
+                        </td>
+                    </tr>     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

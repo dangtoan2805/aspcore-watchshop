@@ -1,0 +1,38 @@
+@page
+@model LoginModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/login.css" />
+</head>
+<body>
+    <div class="containter">
+    <div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Login Form -->
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+        <form id="account" method="post">
+            <input type="text" id="login" class="fadeIn second"  asp-for="Input.Email" placeholder="login">
+            <input type="password" id="password" class="fadeIn third" asp-for="Input.Password" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <partial name="_ValidationScriptsPartial" />
+    </body>
+</html>
+

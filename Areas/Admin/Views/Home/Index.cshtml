@@ -1,0 +1,105 @@
+ @{
+   ViewBag.Title="Tổng quan";
+   ViewBag.IndexSideNav=0;
+ }
+ @section css{
+    <link href="~/lib/daterangepicker/daterangepicker.css" rel="stylesheet"/>
+ }
+ @section scripts{
+    <script src="~/lib/daterangepicker/moment.min.js"></script>
+    <script src="~/lib/daterangepicker/daterangepicker.js"></script>
+    <script src="~/lib/charts/Chart.min.js"></script>
+    <script src="~/js/admin/report.js"> </script>
+ }
+ <div class="content-wrapper">
+    <div class="content">
+      <!-- Top Statistics -->
+      <div class="row">
+        <!-- Ỏrders Done -->
+        <div class="col-md-6 col-lg-6 col-xl-3">
+          <div class="media widget-media p-4 bg-white border">
+            <div class="icon rounded-circle mr-4 bg-primary">
+              <i class="mdi mdi-library-books text-white "></i>
+            </div>
+            <div class="media-body align-self-center">
+              <h4 class="text-primary mb-2">@ViewBag.Dones</h4>
+              <p>Đơn hàng hoàn thành</p>
+            </div>
+          </div>
+        </div>
+        <!-- Ỏrders Delivery -->
+        <div class="col-md-6 col-lg-6 col-xl-3">
+          <div class="media widget-media p-4 bg-white border">
+            <div class="icon rounded-circle bg-warning mr-4">
+              <i class="mdi mdi-library-books text-white "></i>
+            </div>
+            <div class="media-body align-self-center">
+              <h4 class="text-primary mb-2">@ViewBag.Received</h4>
+              <p>Đơn hàng đã xác nhận </p>
+            </div>
+          </div>
+        </div>
+        <!-- Orders Received -->
+        <div class="col-md-6 col-lg-6 col-xl-3">
+          <div class="media widget-media p-4 bg-white border">
+            <div class="icon rounded-circle mr-4 bg-danger">
+              <i class="mdi mdi-library-books text-white "></i>
+            </div>
+            <div class="media-body align-self-center">
+              <h4 class="text-primary mb-2">@ViewBag.Deliverys</h4>
+              <p>Đơn hàng đang giao</p>
+            </div>
+          </div>
+        </div>
+        <!-- Total Revenue -->
+        <div class="col-md-6 col-lg-6 col-xl-3">
+          <div class="media widget-media p-4 bg-white border">
+            <div class="icon rounded-circle mr-4  bg-success ">
+              <i class="mdi mdi-currency-usd text-white "></i>
+            </div>
+            <div class="media-body align-self-center">
+              <h4 class="text-primary mb-2">@ViewBag.TotalRevenue</h4>
+              <p>Tổng doanh thu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Chart & Graph-->
+      <div class="row">
+        <div class="col-xl-12 col-md-12">
+          <!-- Sales Graph -->
+          <div class="card card-default" data-scroll-height="675">
+            <div class="card-header">
+              <div class="col-md-6 col-12 mb-3"> 
+                <h2>Thống kê đơn hàng</h2>
+              </div>
+              <div class="col-md-6 col-12 mb-3"> 
+                <div class="ml-auto vt-daterange">                
+                  <div id="reportrange" class="form-control">
+                      <i class="mdi mdi-calendar"></i>
+                      <span></span> <i class="mdi mdi-chevron-down"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="chart-content" class="card-body"></div>
+            <div class="card-footer d-flex flex-wrap bg-white p-0">
+              <div class="col-6 px-0">
+                <div class="text-center p-4">
+                  <h4 id="vt-orders"></h4>
+                  <p class="mt-2">Đơn hàng</p>
+                </div>
+              </div>
+              <div class="col-6 px-0">
+                <div class="text-center p-4 border-left">
+                  <h4 id="vt-revenue"></h4>
+                  <p class="mt-2">Doanh thu</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+ 

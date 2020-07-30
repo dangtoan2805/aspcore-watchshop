@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = ViewBag.Title;
+}
+@section Css{
+    <link href="~/css/product.css" rel="stylesheet" />
+}
+<span id="vt-res-js" class="d-none">@ViewBag.RequestName</span>
+<div class="container-fluid bg-dark text-center">
+    <h3 class="m-0 py-2 text-white">@ViewBag.Title</h3>
+</div>
+<div id="products">
+    <!--***** Breadcrumb *****-->
+    <nav  class="container">
+        <ol class="vt-breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+            <li class="ml-auto"><span id="vt-total">0</span> sản phẩm</li>
+        </ol>
+    </nav>
+    <!--*****Filter*****-->
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="text-left vt-sort">
+                    <div class="dropdown">
+                        <button class="btn border-0 dropdown-toggle text-left" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span id="vt-selectFilter">Loại dây</span>
+                        </button>
+                        <div id="select-wire"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" data-wire="0">Tất cả</a>
+                            <a class="dropdown-item" data-wire="1">Dây Da</a>
+                            <a class="dropdown-item" data-wire="2">Dây Vải</a>
+                            <a class="dropdown-item" data-wire="3">Dây Kim Loại</a>
+                            <a class="dropdown-item" data-wire="4">Dây Nhựa</a>
+                            <a class="dropdown-item" data-wire="5">Dây Cao Su</a>
+                            <a class="dropdown-item" data-wire="6">Dây Ceramic</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="text-right vt-sort">
+                    <div class="dropdown ">
+                        <button class="btn border-0 dropdown-toggle text-right " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span id="vt-orderFilter">Sắp xếp</span>
+                        </button>
+                        <div id="select-order" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" data-order="0" >Giá cao</</a>
+                            <a class="dropdown-item" data-order="1" >Giá thấp</a>               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <!--*****List Product*****-->
+    <div class="container  pt-2">
+        <div class="pt-md-3 pt-2 text-center">
+            <div id="vt-container-data" class="row">       
+            </div>
+        </div>
+    </div>
+    <!--*****Paging*****-->
+    <div class="container" >
+        <ul id="vt-pagination" class="pagination pagination-sm justify-content-center">
+        </ul>
+    </div>
+</div>
+
+

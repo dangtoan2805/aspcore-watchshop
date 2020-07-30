@@ -1,0 +1,49 @@
+@{
+    ViewBag.Title="Khách hàng";
+    ViewBag.IndexSideNav=3;
+}
+@section scripts{
+    <script src="~/js/admin/customers.js"> </script>
+}
+<div class="content-wrapper">
+    <div class="content">
+        <div class="card card-table-border-none" id="recent-orders">
+            <div class="card-header justify-content-between">
+                <div class="col-md-3 col-12 mb-3">
+                    <h2 class="mb-0" >Khách hàng</h2>
+                </div>
+                <!-- Search -->
+                <div class="col-md-7 col-12 mb-3">
+                    <div class="search-form w-100">
+                        <input type="text" id="search-input" class="form-control" placeholder="'', 'tên','số điện thoại."/>
+                    </div>
+                </div>
+                <div class="col-md-2 col-12 mb-3 text-right">
+                    Tổng KH: <span id="vt-total"></span></p>
+                </div>
+            </div>
+            <div class="card-body pt-0 pb-5 vt-card-body">
+                 <div id="vt-loader">
+                    <div class="loader"></div>
+                </div>
+                <div id="vt-data">
+                    <!--Header List-->
+                    <div class="row mb-3 text-dark">
+                        <div class="col-md-1 col-2">STT</div>
+                        <div class="col-md-3 col-6">Họ Tên</div>
+                        <div class="col-md-2 col-4">Phone</div>
+                        <div class="col-md-6 vt-d-none">Địa Chỉ</div>
+                    </div>
+                    <!--Content List-->
+                    <div id="vt-container-data"></div>
+                </div>
+            </div>
+            <div class="card-footer bg-white py-3 text-center">
+                <nav>
+                    <ul id="vt-pagination" class="pagination pagination-sm justify-content-center">
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

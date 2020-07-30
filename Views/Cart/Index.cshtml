@@ -1,0 +1,124 @@
+﻿@model OrderDetailVM;
+@{
+    ViewData["Title"] = "Cart";
+}
+@section Css{
+    <link href="~/css/product.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/js/cart.js"></script>
+}
+
+<div class="container-fluid bg-dark text-center">
+    <h3 class="m-0 py-2 text-white">Giỏ hàng</h3>
+</div>
+<div>
+    <!--***** Breadcrumb *****-->
+    <nav class="container">
+        <ol class="vt-breadcrumb">
+            <li class="breadcrumb-item"><a href="/Home/Index">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+        </ol>
+    </nav>
+    <!--***** Shopping bag *****-->
+    <div class="container">
+        <!--***** Header Table *****-->
+        <div class="row vt-header-table">
+            <div class="col-md-4 col-4 h5">Sản phẩm</div >
+            <div class="col-md-2 col-4 text-center h5">Đơn giá</div>
+            <div class="col-md-2 col-4 text-center h5">Giảm giá</div>
+            <div class="col-md-2 col-2 text-center h5">SL</div>
+            <div class="col-md-2 col-2 text-center h5"></div>
+        </div>
+        <hr class="pb-3">
+         <!--***** Body Table *****-->
+         @if(ViewBag.Cart!= null)
+         {
+            foreach (var item in ViewBag.Cart)
+            {
+                <div class="row align-items-center pb-3 cart-item">
+                    <div class="col-md-4 col-4">
+                        <a class="text-dark" href="/Product/ProductDetail?id=@item.ProductID">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="vt-img" style="width:100px">
+                                        <img id="vt-photo-show" src="~/product/@item.Image" alt="Card image cap">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 text-left"s>
+                                    <p class="mb-1">@item.ProductName</p>
+                                </div>
+                            </div>    
+                        </a>
+                    </div>
+                    <div class="col-md-2 col-4 text-center m-0 vt-price">
+                        <span>@item.Price</span>
+                        <sup>đ</sup>
+                    </div>
+                    <div class="col-md-2 col-4 text-center m-0 vt-promotion">
+                        @{var prom = item.Promotion * 100;}
+                        <span>@prom</span>
+                        <sup>%</sup>
+                    </div>     
+                    <div class="col-md-2 col-2 text-center">
+                        <div class="row">
+                            <div  class="col-md-4 col-xs-12 vt-addition">
+                                <button  type="button" class="btn btn-dark fa fa-angle-up"></button>
+                            </div>
+                            <div  class="col-md-4 col-xs-12 vt-quantity">
+                                @item.Quantity
+                            </div>
+                            <div class="col-md-4 col-xs-12 vt-reduction" >
+                                <button  type="button" class="btn btn-dark fa fa-angle-down"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2 text-center ">
+                        <button data-itemid="@item.ProductID" type="button" class="btn btn-danger fa fa-trash-o vt-remove" aria-hidden="true"></button>    
+                    </div>
+                </div>
+            }
+         }
+    </div>
+    <hr class="pb-3">
+    <!--***** Recipient *****-->
+    <div class="container">
+        <form id="vt-form" action="/Cart/Submit" method="POST">
+            <div class="row pb-5">
+                <div class="col-md-6 co-12 order-sm-2">
+                    <h4 class="vt-title">Tổng cộng</h4>
+                    <div class="row">
+                        <div class="col-6">
+                            <p>Tông Đơn hàng</p>
+                            <p>Phí vận chuyển</p>
+                            <p>Thuế</p>
+                            <p>Số tiền thanh toán</p>
+                        </div>
+                        <div class="col-6 text-right">
+                            <p><span id="vt-total-cart">0</span> đ</p>
+                            <p><span id="vt-tranpost">@ViewBag.Tranpost</span> đ</p>
+                            <p><span id="vt-tax">@ViewBag.Tax</span> %</p>
+                            <p><span id="vt-total-bill"></span> đ</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 co-12">
+                    <h4 class="vt-title">Thông tin giao hàng</h4>
+                        <div class="form-group">
+                            <input type="phone" class="form-control" asp-for="Phone" placeholder="Số điện thoại" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" asp-for="Customer" placeholder="Họ tên" required/>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" asp-for="Address" rows="3" placeholder="Địa chỉ giao hàng" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" asp-for="Note" rows="3" placeholder="Ghi chú"></textarea>
+                        </div>
+                </div>
+            </div>
+            <button class="btn btn-dark w-100" type="submit" >Đặt hàng</button>
+        </form>
+    </div>
+</div>

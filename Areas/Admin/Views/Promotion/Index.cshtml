@@ -1,0 +1,52 @@
+@{
+    ViewBag.Title="Khuyễn mãi";
+    ViewBag.IndexSideNav=4;
+}
+@section scripts{
+    <script src="~/js/admin/promotion.js"> </script>
+ }
+<div class="content-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-12">
+            <!-- Product Table -->
+                <div class="card card-table-border-none" id="recent-orders">
+                    <div class="card-header justify-content-between">
+                        <h2>Khuyến mãi</h2>
+                        <div class="ml-auto d-flex ">
+                            <a href="#" class="btn btn-danger py-3 text-uppercase">Add</a>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-5">
+                        <div id="vt-loader">
+                            <div class="loader"></div>
+                        </div>
+                        <table class="table card-table table-responsive table-responsive-large" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên SP</th>
+                                    <th>Từ</th>
+                                    <th>Đến</th>
+                                    <th>Mức giảm</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="vt-container-data">                                   
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer bg-white py-3 text-center">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <nav class="pr-4">
+                                <ul id="vt-pagination" class="pagination pagination-sm justify-content-center">
+                                </ul>
+                            </nav>
+                            <p class="text-secondary pl-4 "><span  id="vt-total">0</span> Khuyến mãi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>
+</div>

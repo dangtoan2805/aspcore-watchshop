@@ -1,0 +1,305 @@
+﻿html {
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+}
+
+body{
+  padding-right: 0 !important;
+}
+
+.vt-link{
+  color: #121416;
+}
+.vt-link:hover{
+  text-decoration: none;
+}
+
+
+.vt-img img {
+  width: 100% !important;
+}
+
+.vt-big-icon {
+  font-size: 1.5rem;
+}
+
+.vt-none-hover {
+  background-color: white !important;
+  color: inherit !important;
+}
+
+.vt-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.75rem !important;
+  list-style: none;
+  margin: 0 !important;
+}
+
+/********************Override Boostraps****************/
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.dropdown-item,
+.page-link {
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #545b62;
+  color: white !important;
+}
+/*********************** Header *********************/
+
+.navbar {
+  margin: 0 -1.5rem;
+}
+
+.vt-nav-title {
+  color: #121416 !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.vt-nav-item {
+  color: #121416;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem !important;
+  text-transform: uppercase;
+}
+
+.vt-collapse {
+  margin: 0 -30px;
+  padding: 0 30px;
+  background-color: #f8f9fa;
+}
+
+@media (min-width: 992px) {
+  .vt-nav-item:hover {
+    background-color: #121416;
+    color: white;
+    border-radius: 0.25rem;
+  }
+
+  .vt-collapse {
+    margin: 0 5rem 0 0 !important;
+    padding: 0;
+    background-color: white;
+  }
+}
+
+@media (min-width: 1050px) {
+  .vt-nav-item {
+    padding: 0.5rem 2rem !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar {
+    margin: 0 !important;
+  }
+
+  .vt-nav-title {
+    width: auto !important;
+  }
+}
+/************************** Footer ***********************/
+
+.vt-list-ft > li {
+  border: none;
+  color: #545b62;
+  padding-left: 0.25rem;
+}
+
+/**********************Seach **********************/
+#result{
+  background-color: #f8f9fa ;
+  margin:0.5rem 1rem 4rem 4rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 500px;
+
+}
+
+.vt-search{
+  width: 100%;
+  z-index: 10;
+  background-color: #f8f9fa;
+}
+
+.vt-result-item{
+  align-items: center;
+}
+
+.vt-price{
+  color: #dc3545;
+  font-size: 1.1rem;
+}
+
+/***************** Home ***********************/
+.vt-line {
+  width: 40%;
+}
+
+.vt-title {
+  font-weight: bold;
+  padding: 1rem 0 !important;
+}
+
+.vt-more {
+  font-size: 1.2rem;
+  text-decoration: underline;
+  color: #343a40;
+}
+
+
+/****************** Cart Shopping *********************/
+.vt-header-table {
+  font-weight: bold;
+  text-align: center;
+}
+
+/****************** Crop Img *********************/
+.vt-outer {
+  position: relative;
+}
+
+.vt-outer:before {
+  content: "";
+  display: block;
+  padding-top: 40%;
+}
+
+.vt-inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.vt-corp {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 992px) {
+  .vt-container {
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+  }
+}
+
+
+/****************** #Loader *********************/
+#vt-loader{
+  position: absolute;
+  left: 0;
+  right: 0;
+  line-height: 580px;
+  text-align: center;
+}
+
+#vt-loader-min{
+  line-height: 70px;
+}
+
+.loader {
+  display: inline-block;
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/****************** #Page *********************/
+
+.pagination, .page-link{
+  height: max-content !important;
+}
+
+.pagination .active a{
+  background-color: #343a40 !important;
+  border: none;
+}
+
+/****************** Custom Admin *********************/
+.vt-input-date{
+  padding: .6rem .5rem !important;
+}
+
+.vt-table-report{
+  height: 445px;
+  overflow-y: auto;
+}
+
+#chart-content{
+  height: 370px;
+}
+
+.vt-daterange{
+  cursor:pointer;
+  width: 100%;
+}
+
+.vt-d-none{
+  display: none !important;
+}
+
+@media (min-width: 992px) {
+  .vt-daterange{
+    width: max-content;
+  }
+  .vt-d-none{
+    display: block !important;
+  }
+}
+
+.vt-modal-open{
+  cursor: pointer;
+}
+
+.vt-dropdown-w{
+  width: 120px;
+}
+
+.vt-custom > .vt-switch-sm{
+  width: 44px !important;
+  height: 22px !important;
+  margin-bottom: 0 !important;
+}
+
+.vt-custom > .vt-switch-sm > .switch-handle{
+  width: 18px !important;
+  height: 18px !important;
+  top: 2px !important;
+}
+.vt-custom > .switch.switch-icon .switch-input:checked ~ .switch-handle{
+  left: 24px;
+}
+
+.vt-item{
+  cursor: pointer;
+}
+
+.vt-event-none {
+  pointer-events: none !important;
+}
+
+.vt-card-body {
+  min-height: 585px;
+  position: relative;
+}

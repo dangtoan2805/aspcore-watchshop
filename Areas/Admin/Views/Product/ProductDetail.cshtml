@@ -1,0 +1,127 @@
+@{
+    ViewBag.Title="Thông tin sản phẩm";
+    ViewBag.IndexSideNav=2;
+    string[] props = ViewBag.Props;
+   
+}
+@model aspCore.WatchShop.Models.ProductDetailVM
+
+@section scripts{
+    <script src="~/js/admin/product-detail.js"></script>
+}
+<div class="content-wrapper">
+    <div class="content">
+         <div class="card card-table-border-none">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <h4>Thông tin sản phẩm</h4>   
+                        </div>
+                        <form id="vt-form" action="/Admin/Product/Submit" method="POST" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="ID">ID</label>
+                                    <input type="number" class="form-control disabled" readonly asp-for="ID" placeholder="..." value="@Model.ID" >
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Name">Tên SP</label>
+                                    <input type="text" class="form-control" asp-for="Name" placeholder="..." value="@Model.Name" required>
+                                    <span class="valid-feedback" asp-validation-for="Name"></span>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label asp-for="Price">Giá bán</label>
+                                    <input type="text" class="form-control" asp-for="Price" placeholder="..." value="@Model.Price" >
+                                    <span class="valid-feedback" asp-validation-for="Price"></span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="CategoryID">Phân loại</label>
+                                    <select class="form-control" asp-for="CategoryID" required>
+                                        @foreach (var item in ViewBag.Category)
+                                        {   
+                                            <option value="@item.ID">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="TypeWireID">Loại dây</label>
+                                    <select class="form-control" asp-for="TypeWireID" required>
+                                        @foreach (var item in ViewBag.Wires)
+                                        {   
+                                            <option value="@item.ID">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row align-items-center">       
+                                <div class="col-md-6 mb-3 text-left">
+                                    <p>Đã bán: @Model.SaleCount</p> 
+                                </div>                 
+                                <div class="col-md-3 mb-3 text-left">
+                                    <p>Dừng bán</p>
+                                </div>
+                                <div class="col-md-3 mb-3 text-right">
+                                    <label class="switch switch-icon switch-primary switch-pill form-control-label">
+                                        @if(Model.isShow){
+                                            <input type="checkbox" class="switch-input form-check-input" checked asp-for="@Model.isShow" >
+                                        }else{
+                                            <input type="checkbox" class="switch-input form-check-input" asp-for="@Model.isShow" >
+                                        }
+                                        <span class="switch-label"></span>
+                                        <span class="switch-handle"></span>
+                                    </label>
+                                </div>                                              
+                            </div> 
+                            <h4 class="my-3">Thông tin chi tiết</h4>
+                            <div class="form-row">
+                                @for (int i = 0; i < props.Length; i++)
+                                {
+                                    <div class="col-md-6 mb-3">
+                                        @Html.Label(props[i])
+                                        @Html.Editor(props[i],String.Empty, new {htmlAttributes = new { @class="form-control"}})
+                                    </div>    
+                                }
+                                <div class="col-md-12 mb-3">
+                                    <label asp-for="DescriptionProduct">Mô tả</label>
+                                    <textarea row="6" type="text" class="form-control" asp-for="DescriptionProduct" placeholder="..." value="@Model.DescriptionProduct"></textarea>
+                                </div> 
+                            </div>
+                            <div class="pt-3">
+                                <button class="btn btn-primary w-25" type="submit" >Lưu</button>
+                                <a class="btn btn-danger w-25" type="button" href="/Admin/Product/Delete/@Model.ID">Xoá Sản phẩm</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h4 class="text-left pb-3">Hình ảnh</h4>
+                        <div class="vt-img mx-auto w-50 pb-5">
+                            <img id="vt-default-img" src="~/product/@Model.Image">
+                        </div>
+                        <input id="vt-image-input" type="file" class="d-none" />
+                        <button id="vt-upload" class="btn btn-secondary w-50">Thêm ảnh</button>
+                        <div id='vt-containter-img' class="row p-5" data-images> 
+                            @if(Model.Images != null)
+                            {
+                                string[] images = Model.Images.Split(',');
+                                @for (int i = 0; i < images.Length; i++)
+                                {
+                                <div class="col-3 p-1 pb-3">
+                                    <div class="vt-img mx-auto" style="width: 150px; height: 150px">
+                                        <img src="~/product/@images[i]" style="height: 100%">
+                                    </div>
+                                    <div class="mx-auto d-flex justify-content-center">
+                                        <button class="vt-set-default btn btn-primary mdi mdi-tshirt-crew w-50 m-2"></button>
+                                        <button class="vt-delete-img btn btn-danger mdi mdi-delete w-50 m-2"></button>
+                                    </div>
+                                </div>   
+                                } 
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
